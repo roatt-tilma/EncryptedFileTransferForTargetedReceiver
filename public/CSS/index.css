@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Lora', serif;
+    letter-spacing: 1px;
+    height: 100vh;
+}
+
+input:focus{
+    outline: none;
+}
+
+a{
+    text-decoration: none;
+    color: #af4c4c;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+/* Landing Page */
+
+.signupformcard,
+.loginformcard,
+.landingpage{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    gap: 40px;
+}
+
+.signupbuttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.signupform input[type="submit"],
+.loginform input[type="submit"],
+.signupbutton,
+.loginbutton{
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  
+    cursor: pointer;
+}
+
+
+/* loginform */
+.signupformcard,
+.loginformcard{
+    height: 50%;
+    width: 30%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    
+    position: absolute;
+    left: 35%;
+    top: 25%;
+}
+
+.signupformcard{
+    height: 60%;
+    top: 20%;
+}
+
+.signupform,
+.loginform{
+    display: flex;
+    flex-direction: column;
+
+    gap: 1em;
+}
+
+.signupform input[type="email"],
+.signupform input[type="password"],
+.loginform input[type="email"],
+.loginform input[type="password"]{
+    font-size: 16px;
+    padding: 0.6em 1em;
+}
+

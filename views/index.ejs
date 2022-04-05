@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/CSS/index.css">
-</head>
-<body>
-    <p>This is the homepage!</p>
-</body>
+    <link rel="stylesheet" href="/CSS/index.css" />
+  </head>
+  <body>
+    <div class="landingpage">
+      <div class="heading"><h1>EFTFTR</h1></div>
+      <div class="description"><p>This website is used to encrypt and decrypt files for a specific user.</p></div>
+      <div class="signupbuttons">
+        <div class="login"><button class="loginbutton" onclick="loginpage()">Login</button></div>
+        <div class="or">OR</div>
+        <div class="signup"><button class="signupbutton" onclick="signuppage()">Signup</button></div>
+      </div>
+    </div>
+  </body>
+  <script>
+      function loginpage(){
+          window.location.href += 'authentication/loginform';
+      }
+
+      function signuppage(){
+          window.location.href += 'authentication/signupform';
+      }
+  </script>
 </html>

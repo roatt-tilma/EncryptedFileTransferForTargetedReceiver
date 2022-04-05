@@ -31,8 +31,10 @@ app.listen(PORT, () => {
 
 
 const userRouter = require('./routes/users');
+const authenticationRouter = require('./routes/authentication');
 
 app.use('/users', userRouter);
+app.use('/authentication', authenticationRouter);
 
 app.get('/', (req, res) => {
     res.render('index', { title: 'HOME' });
