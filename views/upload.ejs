@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="/CSS/index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/CSS/index.css" />
+  </head>
+  <body>
     <%- include('./partials/navbar.ejs') %>
-</body>
+    <form action="/site/receiveremail" class="uploadform">
+      <h1>Upload a file to encrypt or decrypt</h1>
+      <input type="file" />
+      <div class="encdecbuttons">
+        <input type="submit" name="encrypt" value="&#xf023;" class="encrypt fa" />
+        <input type="submit" name="decrypt" value="&#xf09c;" class="decrypt fa" />
+      </div>
+    </form>
+  </body>
 </html>
