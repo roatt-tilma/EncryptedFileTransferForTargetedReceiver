@@ -6,13 +6,63 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <form action="/site/receiveremail" class="uploadform">
+    <form action = "/site/receiveremail" class="uploadform">
       <h1>Upload a file to encrypt or decrypt</h1>
-      <input type="file" />
+      <input type="file" id="fileupload" name="file" />
       <div class="encdecbuttons">
-        <input type="submit" name="encrypt" value="&#xf023;" class="encrypt fa" />
-        <input type="submit" name="decrypt" value="&#xf09c;" class="decrypt fa" />
+        <!-- <input type="submit" name="encrypt" value="&#xf023;" class="encrypt fa"> -->
+        <!-- <input type="submit" name="decrypt" value="&#xf023;" class="decrypt fa"> -->
+        <button class="encrypt fa" onclick="saveFile()">&#xf023;</button>
+        <button class="decrypt fa" onclick="decrypt()">&#xf09c;</button>
       </div>
     </form>
   </body>
+  <script>
+
+    var fileContent = '';
+    var fileName = '';
+    var fileSize = 0;
+
+    const handleFileUpload = (file) => {
+      let fileReader = new FileReader();
+
+      fileReader.onloadend = (e) => {
+        fileContent += fileReader.result;
+        fileName = file.name;
+        fileSize = file.size;
+      };
+
+      fileReader.readAsText(file);
+    };
+
+    const saveFile = () => {
+
+      var data = {};
+      data.content = fileContent;
+      data.name = fileName;
+      data.size = fileSize;
+      fetch("http://localhost:3000/site/saveFile", {
+        method: "POST",
+        headers : {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    const decrypt = () => {};
+
+    document
+      .querySelector("#fileupload")
+      .addEventListener("change", (event) => {
+        handleFileUpload(event.target.files[0]);
+      });
+  </script>
 </html>

@@ -6,10 +6,10 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <form action="#" class="receiverform">
+    <form action="/site/encrypt" method="POST" class="receiverform">
       <h1>Enter email address of receiver</h1>
-      <input type="email" placeholder="Email Address"/>
-      <input type="submit" name="send" value="&#xf1d8;" class="fa"> 
+      <input type="email" name="email" placeholder="Email Address"/>
+      <button class="sendmail fa">&#xf1d8;</button>
     </form>
   </body>
 </html>

@@ -1,4 +1,5 @@
 const express = require('express');
+const fileupload = require('express-fileupload');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -15,6 +16,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use(fileupload());
+// app.use(fileupload({
+//     useTempFiles : true,
+//     tempFileDir : '/tmp/'
+// }));
 
 const PORT = process.env.PORT || 3000;
 
