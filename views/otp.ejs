@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>EmailVerification</title>
+</head>
+<body>
+    <div class="center-box user-verification">
+        <h1> <%= title %> Email Verification</h1>
+        <h3 id="wrong_otp"></h3>
+        <form class="user-verification-form" id="otp-form">
+            <label for="OTP">OTP</label>
+            <input type="password" name="OTP" id="OTP">
+            <input type="submit" value="Enter" class="btn" id="submit">
+            <!-- <input type="email" name = "email" value= <%= email %> >
+            <input type = "password" name = "password" value= <%= password %> > -->
+            
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.querySelector('#otp-form');
+    form.addEventListener("submit", otpVerify);
+
+    function otpVerify(e){
+        console.log(e)
+        e.preventDefault();
+
+        const otp = document.querySelector('#OTP').value;
+        
+        var data = {};
+        data.otp = otp;
+        data.email = "<%= email %>";
+        data.password = "<%= password %>"
+
+
+        fetch("http://localhost:3000/users/otp",{
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(data => {
+            console.log('Success:');
+            location.href = "http://localhost:3000/authentication/loginform";
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+
+
+    }
+
+    function wrong_message(){
+        document.getElementById("wrong_otp").innerHTML="Wrong OTP Inserted! Try Again!";
+    }
+</script>
+</html>

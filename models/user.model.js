@@ -15,6 +15,10 @@ const userSchema = new Schema({
         required: true,
         minlength: 8
     },
+    publicKey: {
+        type : String,
+        required : true, 
+    }
 }, {
     timestamps: true,
 });
