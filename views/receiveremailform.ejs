@@ -6,10 +6,38 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <form action="/site/encrypt" method="POST" class="receiverform">
+    <form action="/site/emailsent" class="receiverform" id="receiverform">
       <h1>Enter email address of receiver</h1>
-      <input type="email" name="email" placeholder="Email Address"/>
-      <button class="sendmail fa">&#xf1d8;</button>
+      <input type="email" name="email" id="email" placeholder="Email Address" />
+      <!-- <input type="submit" class="sendmail fa" value="&#xf1d8;" /> -->
+      <button class="sendmail fa" onclick="encrypt()">&#xf1d8;</button>
     </form>
+    <script>
+      const encrypt = () => {
+
+        const email = document.querySelector("#email").value;
+
+        var data = {};
+
+        data.email = email;
+        data.filename = localStorage.getItem("filename");
+        localStorage.removeItem("filename");
+
+        fetch("http://localhost:3000/site/encrypt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
   </body>
 </html>

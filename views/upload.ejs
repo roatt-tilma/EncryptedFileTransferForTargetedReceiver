@@ -41,6 +41,9 @@
       data.content = fileContent;
       data.name = fileName;
       data.size = fileSize;
+
+      localStorage.setItem('filename', data.name);
+
       fetch("http://localhost:3000/site/saveFile", {
         method: "POST",
         headers : {

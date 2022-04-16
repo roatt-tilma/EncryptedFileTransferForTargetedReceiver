@@ -75,7 +75,7 @@ router.post("/otp", async (req, res)=>{
         const newUser = new User({
             email : email,
             password : hashedPassword,
-            publicKey : publicKey,
+            privateKey : privateKey,
         });
 
         newUser.save()
