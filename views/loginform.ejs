@@ -7,9 +7,9 @@
 <body>
     <div class="loginformcard">
         <h1>Login</h1>
-        <form action="#" class="loginform">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+        <form action="/users/login" method="POST" class="loginform">
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
             <input type="submit" name="login" value="Login">
         </form>
         <p class="nottherightform">Don't have an account? <a href="/authentication/signupform">Signup</a></p>

@@ -16,13 +16,12 @@ const user_signup = (req,res) => {
             if(data.length == 0){
                 if(password == confPassword){
                     const salt = await bcrypt.genSalt()
-                    const hashedEmail = await bcrypt.hash(userEmail,salt)
+                    // const hashedEmail = await bcrypt.hash(userEmail,salt)
                     const hashedPassword = await bcrypt.hash(password,salt)
                     console.log(salt)
-                    console.log(hashedEmail)
                     console.log(hashedPassword)
                     const newUser = new User({
-                        email : hashedEmail,
+                        email : userEmail,
                         password : hashedPassword,
                     });
                     newUser.save()
