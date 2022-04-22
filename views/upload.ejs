@@ -6,14 +6,15 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <form action = "/site/receiveremail" class="uploadform">
+    <!-- <form action = "/site/receiveremail" class="uploadform"> -->
+    <form class="uploadform">
       <h1>Upload a file to encrypt or decrypt</h1>
-      <input type="file" id="fileupload" name="file" />
+      <input type="file" id="fileupload" name="file" required/>
       <div class="encdecbuttons">
         <!-- <input type="submit" name="encrypt" value="&#xf023;" class="encrypt fa"> -->
         <!-- <input type="submit" name="decrypt" value="&#xf023;" class="decrypt fa"> -->
-        <button class="encrypt fa" onclick="saveFile()">&#xf023;</button>
-        <button class="decrypt fa" onclick="decrypt()">&#xf09c;</button>
+        <button class="encrypt fa" onclick="saveFile('encrypt')">&#xf023;</button>
+        <button class="decrypt fa" onclick="saveFile('decrypt')">&#xf09c;</button>
       </div>
     </form>
   </body>
@@ -35,25 +36,32 @@
       fileReader.readAsText(file);
     };
 
-    const saveFile = () => {
+    const saveFile = (url) => {
 
       var data = {};
       data.content = fileContent;
       data.name = fileName;
       data.size = fileSize;
 
+      var formurl;
+
+      if (url === "encrypt"){
+        formurl = "receiveremail";
+      } else if (url === "decrypt"){
+        formurl = "receiverpublickey";
+      }
+
       localStorage.setItem('filename', data.name);
 
-      fetch("http://localhost:3000/site/saveFile", {
+      fetch(`http://localhost:3000/site/saveFile/${url}`, {
         method: "POST",
         headers : {
           'Content-Type' : 'application/json',
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          location.href = `http://localhost:3000/site/${formurl}`;
         })
         .catch((error) => {
           console.error(error);

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/CSS/index.css" />
+  </head>
+  <body>
+    <%- include('./partials/navbar.ejs') %>
+    <form class="receiverform pkform" id="pkform">
+      <h1>Enter email address of receiver</h1>
+      <textarea class="pktextarea" name="publickey" id="publickey" placeholder="Enter your public key" rows="5" cols="40"></textarea>
+      <!-- <input type="submit" class="sendmail fa" value="&#xf1d8;" /> -->
+      <button class="sendmail pkbutton" onclick="decrypt()">Decrypt</button>
+    </form>
+    <script>
+      const decrypt = () => {
+
+        const publickey = document.getElementById("publickey").value;
+
+        var data = {};
+
+        data.publickey = publickey;
+        data.filename = localStorage.getItem("filename");
+        localStorage.removeItem("filename");
+
+        // fetch("http://localhost:3000/site/decrypt", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(data),
+        // })
+        //   .then((response) => response.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
+
+        fetch("http://localhost:3000/site/decrypt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((data) => {
+            console.log(data);
+            location.href = "http://localhost:3000/site/upload";
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
+</html>
